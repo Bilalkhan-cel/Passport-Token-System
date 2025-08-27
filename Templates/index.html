@@ -1,11 +1,114 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>APP</title>
-</head>
-<body>
-    <h1>real</h1>
-</body>
-</html>
+{% extends "base.html" %}
+{% block content %}
+<h2>Passport Application Form</h2>
+<form method="POST">
+    <div class="form-container">
+        <h3>Personal Information</h3>
+         <label for="name">Full Name:</label>
+         <input type="text" id="name" name="name" placeholder="Enter your complete name" required><br><br>
+         <label for="cnic">Full Name:</label>
+         <input type="text" id="cnic" name="cnic" placeholder="XXXXX-XXXXXXX-X"pattern="[0-9]{5}-[0-9]{7}-[0-9]{1}" required><br><br>
+         
+    </div>
+   
+    <div class="form-container">
+        <h3>Address Information</h3>
+        <label for="address">Address</label>
+        <textarea id="address" name="address" rows="3" placeholder="House/Street/Area etc" required></textarea><br><br>
+
+        <label for="province">Province:</label>
+        <select id="province" name="address" required>
+            <option value="">Select Your Province</option>
+            <option value="Punjab">Punjab</option>
+            <option value="Sindh">Sindh</option>
+            <option value="Balochistan">Balochistan</option>
+            <option value="KPK">Khyber PakhtunKhwa</option>
+            <option value="Gilgit-Baltistan">Gilgit-Baltistan</option>
+            <option value="AJK">Azad Jamu & Kashmir</option>
+        </select><br><br>
+
+        <label for="city">City:</label>
+    <select id="city" name="city" required>
+        <option value="">Select City</option>
+        <option value="Lahore">Lahore</option>
+        <option value="Karachi">Karachi</option>
+        <option value="Islamabad">Islamabad</option>
+        <option value="Rawalpindi">Rawalpindi</option>
+        <option value="Faisalabad">Faisalabad</option>
+        <option value="Multan">Multan</option>
+        <option value="Peshawar">Peshawar</option>
+        <option value="Quetta">Quetta</option>
+        <option value="Sialkot">Sialkot</option>
+        <option value="Gujranwala">Gujranwala</option>
+        <option value="Hyderabad">Hyderabad</option>
+        <option value="Bahawalpur">Bahawalpur</option>
+        <option value="Sargodha">Sargodha</option>
+        <option value="Sukkur">Sukkur</option>
+        <option value="Abbottabad">Abbottabad</option>
+        <option value="Mardan">Mardan</option>
+        <option value="Mingora">Mingora</option>
+        <option value="Larkana">Larkana</option>
+        <option value="Sahiwal">Sahiwal</option>
+        <option value="Okara">Okara</option>
+    </select><br><br>
+
+        <label for="district">District:</label>
+    <select id="district" name="district" required>
+        <option value="">Select District</option>
+        <option value="Lahore">Lahore</option>
+        <option value="Karachi">Karachi</option>
+        <option value="Islamabad">Islamabad</option>
+        <option value="Rawalpindi">Rawalpindi</option>
+        <option value="Faisalabad">Faisalabad</option>
+        <option value="Multan">Multan</option>
+        <option value="Peshawar">Peshawar</option>
+        <option value="Quetta">Quetta</option>
+        <option value="Sialkot">Sialkot</option>
+        <option value="Gujranwala">Gujranwala</option>
+        <option value="Hyderabad">Hyderabad</option>
+        <option value="Bahawalpur">Bahawalpur</option>
+        <option value="Sargodha">Sargodha</option>
+        <option value="Sukkur">Sukkur</option>
+    </select><br><br>
+
+        <label for="domicile">Domicile:</label>
+    <select id="domicile" name="domicile" required>
+        <option value="">Select Domicile</option>
+        <option value="Punjab">Punjab</option>
+        <option value="Sindh">Sindh</option>
+        <option value="Khyber Pakhtunkhwa">Khyber Pakhtunkhwa</option>
+        <option value="Balochistan">Balochistan</option>
+        <option value="Gilgit-Baltistan">Gilgit-Baltistan</option>
+        <option value="Azad Jammu & Kashmir">Azad Jammu & Kashmir</option>
+        <option value="Islamabad">Islamabad Capital Territory</option>
+    </select><br><br>
+
+    </div>
+
+    <div class="form-container">
+    <h3>Contact Information</h3>
+    <label for="email">Email Address *</label>
+        <input type="email" id="email" name="email" placeholder="example@domain.com" required><br><br>
+    
+   
+     <label for="phone">Phone Number *</label>
+            <select id="country_code" name="country_code" class="country-code">
+                <option value="+92">Pakistan (+92)</option>
+                <option value="+1">USA (+1)</option>
+                <option value="+44">UK (+44)</option>
+                <option value="+91">India (+91)</option>
+            </select>
+           
+            <input type="tel" id="phone" name="phone" 
+                   pattern="(3\d{9}|1\d{9})" 
+                   title="Enter valid Pakistani phone number (e.g., 3001234567 or 1234567890)"
+                   placeholder="3001234567"
+                   required><br><br>
+               
+    </div>     
+ 
+    <button type="submit" >Submit Application</button>
+
+</form>
+
+{% endblock %}
