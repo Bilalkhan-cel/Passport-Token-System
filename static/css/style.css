@@ -1,0 +1,387 @@
+/* Pakistani Passport Application Form - Professional Styling */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* CSS Variables for Pakistani Theme */
+:root {
+    --pakistan-green: #00573F;
+    --pakistan-dark-green: #003d2b;
+    --pakistan-light-green: #00b56a;
+    --white: #ffffff;
+    --light-gray: #f8f9fa;
+    --border-gray: #e1e5e9;
+    --text-dark: #2d3436;
+    --text-light: #636e72;
+    --error-red: #e74c3c;
+    --success-green: #00b894;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+    --shadow-hover: 0 8px 15px rgba(0, 0, 0, 0.1);
+    --border-radius: 8px;
+    --transition: all 0.3s ease;
+}
+
+/* Global Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, var(--light-gray) 0%, #e8f5e8 100%);
+    min-height: 100vh;
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+/* Header Section */
+.header-section {
+    background: linear-gradient(135deg, var(--pakistan-green) 0%, var(--pakistan-dark-green) 100%);
+    color: var(--white);
+    padding: 2rem 0;
+    text-align: center;
+    box-shadow: var(--shadow);
+    margin-bottom: 2rem;
+}
+
+.logo-container {
+    margin-bottom: 1rem;
+}
+
+.government-logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid var(--white);
+    padding: 8px;
+    background: var(--white);
+    box-shadow: var(--shadow);
+}
+
+.header-text h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.header-text h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+    opacity: 0.9;
+}
+
+.header-text h3 {
+    font-size: 1.1rem;
+    font-weight: 400;
+    opacity: 0.8;
+}
+
+/* Main Container */
+.main-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Form Styling */
+.passport-form {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+/* Form Sections */
+.form-section {
+    padding: 2rem;
+    border-bottom: 1px solid var(--border-gray);
+}
+
+.form-section:last-of-type {
+    border-bottom: none;
+}
+
+.section-header {
+    margin-bottom: 1.5rem;
+}
+
+.section-header h3 {
+    color: var(--pakistan-green);
+    font-size: 1.3rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 2px solid var(--pakistan-light-green);
+    padding-bottom: 0.5rem;
+}
+
+/* Form Layout */
+.form-row {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group.full-width {
+    flex: 100%;
+}
+
+.form-group.phone-group {
+    flex: 2;
+}
+
+/* Labels */
+label {
+    font-weight: 500;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.required {
+    color: var(--error-red);
+    font-weight: 600;
+}
+
+/* Input Styling */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea,
+select {
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--border-gray);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-family: inherit;
+    transition: var(--transition);
+    background: var(--white);
+    width: 100%;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--pakistan-light-green);
+    box-shadow: 0 0 0 3px rgba(0, 181, 106, 0.1);
+    transform: translateY(-1px);
+}
+
+/* Textarea */
+textarea {
+    resize: vertical;
+    min-height: 80px;
+    font-family: inherit;
+}
+
+/* Select Styling */
+select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 16px;
+    padding-right: 3rem;
+    appearance: none;
+}
+
+/* Phone Container */
+.phone-container {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.country-code {
+    width: 120px;
+    flex-shrink: 0;
+}
+
+.phone-container input[type="tel"] {
+    flex: 1;
+}
+
+/* Submit Section */
+.submit-section {
+    padding: 2rem;
+    background: var(--light-gray);
+    text-align: center;
+}
+
+/* Submit Button */
+.submit-btn {
+    background: linear-gradient(135deg, var(--pakistan-green) 0%, var(--pakistan-dark-green) 100%);
+    color: var(--white);
+    border: none;
+    padding: 1rem 3rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+    background: linear-gradient(135deg, var(--pakistan-dark-green) 0%, #002117 100%);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow);
+}
+
+/* Footer Section */
+.footer-section {
+    background: var(--pakistan-dark-green);
+    color: var(--white);
+    text-align: center;
+    padding: 1.5rem 0;
+    margin-top: 2rem;
+}
+
+.footer-section p {
+    margin-bottom: 0.5rem;
+    opacity: 0.9;
+}
+
+.footer-section p:last-child {
+    margin-bottom: 0;
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+/* Icons (Simple CSS icons) */
+.icon-person::before { content: "👤 "; }
+.icon-location::before { content: "📍 "; }
+.icon-contact::before { content: "📞 "; }
+.icon-submit::before { content: "📋 "; }
+
+/* Validation Styles */
+input:invalid:not(:placeholder-shown),
+select:invalid:not([value=""]),
+textarea:invalid:not(:placeholder-shown) {
+    border-color: var(--error-red);
+    box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+}
+
+input:valid,
+select:valid,
+textarea:valid {
+    border-color: var(--success-green);
+}
+
+/* Loading State */
+.submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header-text h1 {
+        font-size: 1.8rem;
+    }
+    
+    .header-text h2 {
+        font-size: 1.2rem;
+    }
+    
+    .main-container {
+        padding: 0 0.5rem;
+    }
+    
+    .form-section {
+        padding: 1.5rem;
+    }
+    
+    .form-row {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .phone-container {
+        flex-direction: column;
+    }
+    
+    .country-code {
+        width: 100%;
+    }
+    
+    .submit-btn {
+        width: 100%;
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-section {
+        padding: 1.5rem 0;
+    }
+    
+    .government-logo {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .header-text h1 {
+        font-size: 1.5rem;
+    }
+    
+    .form-section {
+        padding: 1rem;
+    }
+    
+    .submit-section {
+        padding: 1.5rem;
+    }
+}
+
+/* Hover Effects for Better UX */
+.form-group:hover input,
+.form-group:hover select,
+.form-group:hover textarea {
+    border-color: var(--pakistan-light-green);
+    transform: translateY(-1px);
+}
+
+/* Print Styles */
+@media print {
+    body {
+        background: var(--white);
+    }
+    
+    .header-section,
+    .footer-section {
+        background: var(--white) !important;
+        color: var(--text-dark) !important;
+    }
+    
+    .submit-section {
+        display: none;
+    }
+    
+    .passport-form {
+        box-shadow: none;
+        border: 1px solid var(--border-gray);
+    }
+}
