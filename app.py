@@ -1,5 +1,7 @@
 from flask import Flask, request,render_template,redirect,url_for
-from flask_sqlalchemy import SQLAlchemy     
+from flask_sqlalchemy import SQLAlchemy  
+
+from pdf import makepdf   
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///passport.db'
@@ -46,6 +48,8 @@ def index():
      try:
             db.session.add(passport_app)  
             db.session.commit()
+            
+            
             return redirect(url_for('index'))
      except Exception as e:      # exception e contains error data if we use except only it will detect error but no idea "WHAT ERROR"
             db.session.rollback()
@@ -57,6 +61,12 @@ def index():
   else:
      return render_template("index.html")
   
+
+
+
+
+
+
 
         
 if __name__ == '__main__':
