@@ -74,9 +74,9 @@ def index():
 @app.route("/submit", methods=["POST"])
 def submit():
     name = request.form.get("name")
-    # 👇 after processing, send user to thankyou page with name
+    
     # ID=request.form.get("cnic")
-    pdf = Passport.query.get(1)
+    pdf = Passport.query.order_by(Passport.id.desc()).first()
     mpdf.makepdf(
         pdf.id, pdf.name, pdf.dob, pdf.age,
         pdf.cnic, pdf.address, pdf.city,
