@@ -13,7 +13,7 @@
 </div>
 
 <div class="main-container">
-    <form method="POST" class="passport-form">
+    <form method="POST" class="passport-form" action="{{url_for('submit')}}">
         <div class="form-section">
             <div class="section-header">
                 <h3><i class="icon-person"></i>Personal Information</h3>
@@ -169,12 +169,12 @@
         </div>
 
         <div class="submit-section">
-            <form action="/sumbit" method="POST">
+            
             <button type="submit" class="submit-btn">
                 <i class="icon-submit"></i>
                 Submit Application
             </button>
-            </form>
+            
         </div>
     </form>
 </div>

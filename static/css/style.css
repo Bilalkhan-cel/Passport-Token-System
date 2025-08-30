@@ -463,3 +463,168 @@ input[type="date"]:valid::before {
     border-color: var(--pakistan-light-green);
     transform: translateY(-1px);
 }
+
+
+/* Thank You Page Styling */
+.thank-you-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 3rem;
+    background: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    text-align: center;
+}
+
+.thank-you-icon {
+    font-size: 4rem;
+    color: var(--success-green);
+    margin-bottom: 1.5rem;
+    animation: bounce 1s ease-in-out;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+    40% {transform: translateY(-20px);}
+    60% {transform: translateY(-10px);}
+}
+
+.thank-you-container h1 {
+    color: var(--pakistan-green);
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.thank-you-container p {
+    color: var(--text-dark);
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.application-details {
+    background: var(--light-gray);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    margin: 2rem 0;
+    text-align: left;
+}
+
+.application-details h3 {
+    color: var(--pakistan-green);
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--pakistan-light-green);
+    padding-bottom: 0.5rem;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border-gray);
+}
+
+.detail-label {
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.detail-value {
+    color: var(--text-light);
+}
+
+.actions-container {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.return-btn {
+    background: linear-gradient(135deg, var(--pakistan-green) 0%, var(--pakistan-dark-green) 100%);
+    color: var(--white);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+    text-decoration: none;
+    display: inline-block;
+}
+
+.return-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+    background: linear-gradient(135deg, var(--pakistan-dark-green) 0%, #002117 100%);
+}
+
+.download-btn {
+    background: linear-gradient(135deg, var(--success-green) 0%, #00a882 100%);
+    color: var(--white);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+    text-decoration: none;
+    display: inline-block;
+}
+
+.download-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+    background: linear-gradient(135deg, #00a882 0%, #008f6e 100%);
+}
+
+/* Responsive Design for Thank You Page */
+@media (max-width: 768px) {
+    .thank-you-container {
+        padding: 2rem;
+        margin: 1rem;
+    }
+    
+    .thank-you-container h1 {
+        font-size: 1.8rem;
+    }
+    
+    .actions-container {
+        flex-direction: column;
+    }
+    
+    .return-btn, .download-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .thank-you-container {
+        padding: 1.5rem;
+    }
+    
+    .thank-you-container h1 {
+        font-size: 1.5rem;
+    }
+    
+    .thank-you-icon {
+        font-size: 3rem;
+    }
+    
+    .application-details {
+        padding: 1rem;
+    }
+    
+    .detail-row {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+}
