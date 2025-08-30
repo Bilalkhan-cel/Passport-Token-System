@@ -18,11 +18,11 @@ def makepdf(token,name, dob, age, CNIC, Address, City, Country, province, Distri
     class PDF(FPDF):
         def header(self):
             try:
-                self.image('logo.jpeg', 10, 8, 33)
+                self.image('static/images/logo.jpeg', 10, 8, 33)
             except:
                 pass
             try:
-                self.image('logo 2.jpeg', 160, 8, 43)
+                self.image('static/images/logo 2.jpeg', 160, 8, 43)
             except:
                 pass
             self.set_font('Arial', 'BI', 20)
@@ -85,7 +85,7 @@ def makepdf(token,name, dob, age, CNIC, Address, City, Country, province, Distri
     {'Country':<26}: {Country}
     {'Date of Issue':<20}: {datetime.now().strftime('%Y-%m-%d')}"""
 
-    pdf.multi_cell(140, 8, details_text, ln=1, align='L')
+    pdf.multi_cell(140, 8, details_text,  align='L')
 
     pdf.ln(10)
 
@@ -109,4 +109,4 @@ def makepdf(token,name, dob, age, CNIC, Address, City, Country, province, Distri
     for instruction in instructions:
         pdf.cell(0, 6, instruction, ln=1, align='L')
 
-    pdf.output("simple.pdf")
+    pdf.output("test.pdf")

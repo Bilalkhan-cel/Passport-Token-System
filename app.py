@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, Integer, String, Date 
 from datetime import datetime
 
-from pdf import makepdf   
+import mpdf 
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///passport.db'
@@ -70,26 +70,26 @@ def index():
      return render_template("index.html")
   
 
-@app.route("/sumbit", methods=['POST'])
-def sumbit():
+
+@app.route("/submit", methods=["POST"])
+def submit():
     name = request.form.get("name")
-    print("✅ Route triggered, got:", name)
-    return f"Form submitted, name = {name}"
-    # if request.method == 'POST':
-    #     print("Form submitted successfully.")
-    #     pdf = Passport.query.filter_by(id=id).first()
-    #     if not pdf:
-    #         return "No record found with ID=1"
+    # 👇 after processing, send user to thankyou page with name
+    # ID=request.form.get("cnic")
+    pdf = Passport.query.get(1)
+    mpdf.makepdf(
+        pdf.id, pdf.name, pdf.dob, pdf.age,
+        pdf.cnic, pdf.address, pdf.city,
+        pdf.domicile, pdf.province, pdf.district
+    )
+    return redirect(url_for("thank_you", name=name))
 
-    #     filepath = makepdf(pdf.id, pdf.name, pdf.dob, pdf.age,
-    #                     pdf.cnic, pdf.address, pdf.city,
-    #                     pdf.domicile, pdf.province, pdf.district)
-
-    #     return f"PDF saved at: {filepath}"
-    # else:
-    #     print("Invalid request method.")
+@app.route("/thankyou")
+def thank_you():
+    name = request.args.get("name", "User")
+    return render_template("thankyou.html", name=name)
     
-
+    
 
 
 
