@@ -9,7 +9,7 @@ from datetime import datetime
 
 # it is incomplete for now
 
-def makepdf(token,name, dob, age, CNIC, Address, City, Country, province, District):
+def makepdf(token,name, dob, age, CNIC, Address, City, Domicile, province, District):
 
     a = token
 
@@ -82,7 +82,7 @@ def makepdf(token,name, dob, age, CNIC, Address, City, Country, province, Distri
     {'Province':<26}: {province}
     {'District':<29}: {District}
     {'City':<30}: {City}
-    {'Country':<26}: {Country}
+    {'Domicile':<26}: {Domicile}
     {'Date of Issue':<20}: {datetime.now().strftime('%Y-%m-%d')}"""
 
     pdf.multi_cell(140, 8, details_text,  align='L')
