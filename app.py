@@ -1,5 +1,7 @@
 from flask import Flask, request,render_template,redirect,url_for
-from flask_sqlalchemy import SQLAlchemy  
+from flask_sqlalchemy import SQLAlchemy 
+from sqlalchemy import Column, Integer, String, Date 
+from datetime import datetime
 
 from pdf import makepdf   
 
@@ -9,8 +11,10 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
 db=SQLAlchemy(app)
 
 class Passport(db.Model):
-    id=db.Column(db.Integer,primary_key=True)
+    id=db.Column(db.Integer,primary_key=True,autoincrement=True)
     name=db.Column(db.String(100),nullable=False)
+    age=db.Column(db.String(100),nullable=False)
+    dob=db.Column(db.Date,nullable=False)
     cnic=db.Column(db.String(50),nullable=False)
     address=db.Column(db.String(250),nullable=False)
     province=db.Column(db.String(100))
@@ -25,6 +29,8 @@ def index():
   if request.method=='POST':
         
      name=request.form.get("name", "").strip()       
+     age=request.form.get("age", "").strip()       
+     dob=request.form.get("dob", "").strip()       
      cnic=request.form.get("cnic", "").strip()         #.strip() handles spacing errors
      address=request.form.get("address", "").strip() 
      province=request.form.get("province", "").strip() 
@@ -35,9 +41,11 @@ def index():
      if not all([name,cnic,address]):                       #error handling for empty inputs
              return "Please fillin all required fields", 400   # 400 IS HTTPS CODE ERROR THAT TELLS BROWSER THAT SOMETHING'S WRONG
                                                             
-                                                                    
+     dob=datetime.strptime(dob, '%Y-%m-%d') #converting string to date object                                                          
      passport_app = Passport(         
             name=name,
+            age=age,
+            dob=dob,
             cnic=cnic,
             address=address,
             province=province,
@@ -62,8 +70,25 @@ def index():
      return render_template("index.html")
   
 
+@app.route("/sumbit", methods=['POST'])
+def sumbit():
+    name = request.form.get("name")
+    print("✅ Route triggered, got:", name)
+    return f"Form submitted, name = {name}"
+    # if request.method == 'POST':
+    #     print("Form submitted successfully.")
+    #     pdf = Passport.query.filter_by(id=id).first()
+    #     if not pdf:
+    #         return "No record found with ID=1"
 
+    #     filepath = makepdf(pdf.id, pdf.name, pdf.dob, pdf.age,
+    #                     pdf.cnic, pdf.address, pdf.city,
+    #                     pdf.domicile, pdf.province, pdf.district)
 
+    #     return f"PDF saved at: {filepath}"
+    # else:
+    #     print("Invalid request method.")
+    
 
 
 

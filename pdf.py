@@ -9,7 +9,7 @@ from datetime import datetime
 
 # it is incomplete for now
 
-def makepdf(name, dob, age, CNIC, Address, City, Country, province, District,token):
+def makepdf(token,name, dob, age, CNIC, Address, City, Country, province, District):
 
     a = token
 
@@ -109,4 +109,4 @@ def makepdf(name, dob, age, CNIC, Address, City, Country, province, District,tok
     for instruction in instructions:
         pdf.cell(0, 6, instruction, ln=1, align='L')
 
-    # pdf.output("simple.pdf")
+    pdf.output("simple.pdf")
