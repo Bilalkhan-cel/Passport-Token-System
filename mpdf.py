@@ -5,6 +5,8 @@ import qrcode
 import io
 from PIL import Image
 from datetime import datetime
+import io
+from io import BytesIO
 
 
 # it is incomplete for now
@@ -109,4 +111,8 @@ def makepdf(token,name, dob, age, CNIC, Address, City, Domicile, province, Distr
     for instruction in instructions:
         pdf.cell(0, 6, instruction, ln=1, align='L')
 
-    pdf.output("test.pdf")
+    pdf.output("real.pdf")
+    # pdf_byte=BytesIO()
+    # pdf.output(pdf_byte)
+    # pdf_byte.seek(0)
+    # return pdf_byte

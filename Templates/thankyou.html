@@ -1,11 +1,55 @@
 {% extends "base.html" %}
 {% block content %}
 
+<div class="header-section">
+    <div class="logo-container">
+        <img src="{{ url_for('static', filename='images/PAK GOVT.jpeg') }}" alt="Pakistan Government Logo" class="government-logo">
+    </div>
+    <div class="header-text">
+        <h1>Government of Pakistan</h1>
+        <h2>Directorate General of Immigration & Passports</h2>
+        <h3>Application Submission Confirmation</h3>
+    </div>
+</div>
 
-<h1>Thanks </h1>
-<h3>{{name}} your form was sumbited</h3>
+<div class="thank-you-container">
+    <div class="thank-you-icon">✅</div>
+    <h1>Thank You, {{ name }}!</h1>
+    <p>Your passport application has been submitted successfully and is now being processed.</p>
+    <p>Your application reference number is: <strong>#{{ token }}</strong></p>
+    
+    <div class="application-details">
+        <h3>Application Summary</h3>
+        <div class="detail-row">
+            <span class="detail-label">Application ID:</span>
+            <span class="detail-value">#{{ token }}</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">Submission Date:</span>
+            <span class="detail-value">{{ submission_date }}</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">Status:</span>
+            <span class="detail-value" style="color: var(--success-green); font-weight: 600;">Submitted ✓</span>
+        </div>
+    </div>
 
+    <p>We have generated your application PDF receipt. You can download it using the button below.</p>
+    <p>Please keep your reference number for future inquiries.</p>
 
+    <div class="actions-container">
+        <a href="/download-pdf/{{ name }}" class="download-btn">
+            📄 Download PDF Receipt
+        </a>
+        <a href="/" class="return-btn">
+            📋 Submit Another Application
+        </a>
+    </div>
+</div>
 
+<div class="footer-section">
+    <p>&copy; 2024 Government of Pakistan - Directorate General of Immigration & Passports</p>
+    <p>For assistance, visit your nearest passport office or call helpline: 051-111-223344</p>
+</div>
 
-{%endblock%}
+{% endblock %}
