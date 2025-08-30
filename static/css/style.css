@@ -1,7 +1,3 @@
-/* Pakistani Passport Application Form - Professional Styling */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
-/* CSS Variables for Pakistani Theme */
 :root {
     --pakistan-green: #00573F;
     --pakistan-dark-green: #003d2b;
@@ -19,7 +15,7 @@
     --transition: all 0.3s ease;
 }
 
-/* Global Styles */
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -34,7 +30,7 @@ body {
     line-height: 1.6;
 }
 
-/* Header Section */
+
 .header-section {
     background: linear-gradient(135deg, var(--pakistan-green) 0%, var(--pakistan-dark-green) 100%);
     color: var(--white);
@@ -356,7 +352,6 @@ textarea:valid {
     }
 }
 
-/* Hover Effects for Better UX */
 .form-group:hover input,
 .form-group:hover select,
 .form-group:hover textarea {
@@ -384,4 +379,87 @@ textarea:valid {
         box-shadow: none;
         border: 1px solid var(--border-gray);
     }
+}
+
+/* Date of Birth Input Styling */
+input[type="date"] {
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--border-gray);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-family: inherit;
+    transition: var(--transition);
+    background: var(--white);
+    width: 100%;
+    cursor: pointer;
+}
+
+input[type="date"]:focus {
+    outline: none;
+    border-color: var(--pakistan-light-green);
+    box-shadow: 0 0 0 3px rgba(0, 181, 106, 0.1);
+    transform: translateY(-1px);
+}
+
+input[type="date"]:hover {
+    border-color: var(--pakistan-light-green);
+    transform: translateY(-1px);
+}
+
+/* Custom calendar icon for date input */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 3px;
+    background-color: var(--pakistan-light-green);
+    opacity: 0.7;
+    transition: var(--transition);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+    background-color: var(--pakistan-green);
+}
+
+/* Date input validation states */
+input[type="date"]:invalid:not(:placeholder-shown) {
+    border-color: var(--error-red);
+    box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+}
+
+input[type="date"]:valid {
+    border-color: var(--success-green);
+}
+
+/* Placeholder text styling for date input */
+input[type="date"]::before {
+    content: attr(placeholder);
+    color: var(--text-light);
+    margin-right: 0.5em;
+}
+
+input[type="date"]:focus::before,
+input[type="date"]:valid::before {
+    content: "";
+}
+
+/* Responsive adjustments for date input */
+@media (max-width: 768px) {
+    input[type="date"] {
+        padding: 0.7rem 0.9rem;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    input[type="date"] {
+        padding: 0.65rem 0.8rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Form group hover effect for date input */
+.form-group:hover input[type="date"] {
+    border-color: var(--pakistan-light-green);
+    transform: translateY(-1px);
 }

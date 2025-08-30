@@ -1,9 +1,6 @@
-from flask import Flask, request,render_template,redirect,url_for
+from flask import Flask, request, render_template, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy 
-from sqlalchemy import Column, Integer, String, Date 
 from datetime import datetime
-
-from pdf import makepdf   
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///passport.db'
@@ -22,27 +19,24 @@ class Passport(db.Model):
     district=db.Column(db.String(100))
     domicile=db.Column(db.String(100))
 
- 
-
 @app.route("/", methods=['POST','GET'])
 def index():
-  if request.method=='POST':
-        
-     name=request.form.get("name", "").strip()       
-     age=request.form.get("age", "").strip()       
-     dob=request.form.get("dob", "").strip()       
-     cnic=request.form.get("cnic", "").strip()         #.strip() handles spacing errors
-     address=request.form.get("address", "").strip() 
-     province=request.form.get("province", "").strip() 
-     city=request.form.get("city", "").strip()          
-     district=request.form.get("district", "").strip()  
-     domicile=request.form.get("domicile", "").strip()  
+    if request.method=='POST':
+        name=request.form.get("name", "").strip()       
+        age=request.form.get("age", "").strip()       
+        dob=request.form.get("dob", "").strip()       
+        cnic=request.form.get("cnic", "").strip()         #.strip() handles spacing errors
+        address=request.form.get("address", "").strip() 
+        province=request.form.get("province", "").strip() 
+        city=request.form.get("city", "").strip()          
+        district=request.form.get("district", "").strip()  
+        domicile=request.form.get("domicile", "").strip()  
 
-     if not all([name,cnic,address]):                       #error handling for empty inputs
-             return "Please fillin all required fields", 400   # 400 IS HTTPS CODE ERROR THAT TELLS BROWSER THAT SOMETHING'S WRONG
+        if not all([name,cnic,address]):                       #error handling for empty inputs
+            return "Please fillin all required fields", 400   # 400 IS HTTPS CODE ERROR THAT TELLS BROWSER THAT SOMETHING'S WRONG
                                                             
-     dob=datetime.strptime(dob, '%Y-%m-%d') #converting string to date object                                                          
-     passport_app = Passport(         
+        dob=datetime.strptime(dob, '%Y-%m-%d') #converting string to date object
+        passport_app = Passport(         
             name=name,
             age=age,
             dob=dob,
@@ -53,49 +47,27 @@ def index():
             district=district,
             domicile=domicile
         )
-     try:
+        try:
             db.session.add(passport_app)  
             db.session.commit()
-            
-            
             return redirect(url_for('index'))
-     except Exception as e:      # exception e contains error data if we use except only it will detect error but no idea "WHAT ERROR"
+        except Exception as e:      # exception e contains error data if we use except only it will detect error but no idea "WHAT ERROR"
             db.session.rollback()
             if "UNIQUE constraint" in str(e):
                 return "CNIC already exits in system" , 400
             else:
                 return f"Error occurred: {str(e)}", 500  #500 IS ERROR OF INTERNAL SERVER ERROR
 
-  else:
-     return render_template("index.html")
-  
+    else:
+        return render_template("index.html")
 
 @app.route("/sumbit", methods=['POST'])
 def sumbit():
     name = request.form.get("name")
     print("✅ Route triggered, got:", name)
     return f"Form submitted, name = {name}"
-    # if request.method == 'POST':
-    #     print("Form submitted successfully.")
-    #     pdf = Passport.query.filter_by(id=id).first()
-    #     if not pdf:
-    #         return "No record found with ID=1"
 
-    #     filepath = makepdf(pdf.id, pdf.name, pdf.dob, pdf.age,
-    #                     pdf.cnic, pdf.address, pdf.city,
-    #                     pdf.domicile, pdf.province, pdf.district)
-
-    #     return f"PDF saved at: {filepath}"
-    # else:
-    #     print("Invalid request method.")
-    
-
-
-
-
-        
 if __name__ == '__main__':
     with app.app_context():
-       db.create_all()
-       
+        db.create_all()
     app.run(debug=True)
