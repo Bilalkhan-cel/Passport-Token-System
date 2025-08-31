@@ -57,7 +57,7 @@ def submit():
                                                             
      dob=datetime.strptime(dob, '%Y-%m-%d') #converting string to date object                                                          
      passport_app = Passport( 
-            token=Passport.query.count() + 1,    
+            token=Passport.query.count() + 1,    # token will be incremented by 1 for each new entry
             name=name,
             age=age,
             dob=dob,
@@ -78,6 +78,7 @@ def submit():
                 return "Token limit reached for today. Please try again tomorrow.", 400
                 
             else:
+            
             
             #     vpdf=mpdf.makepdf(
             #     passport_app.token, passport_app.name, passport_app.dob, passport_app.age,
@@ -104,19 +105,22 @@ def thank_you():
     token = request.args.get("token", "",)
     id = request.args.get("id", "",)
     
-    return render_template("thankyou.html", name=name, token=token,id=id)
+    return render_template("thankyou.html", name=name, token=token,id=id) # passed id and token and name so that in thankyou.html we can use it to generate pdf and we can also see our name and token on screen
 
 @app.route("/view/<int:id>")
 def view(id):
     try:
-        pass_app=Passport.query.get_or_404(id)
+        pass_app=Passport.query.get_or_404(id) # got all the data by id from database
+        # gereted pdf from mpdf.py
         pdf_data=mpdf.makepdf(
                 pass_app.token, pass_app.name, pass_app.dob, pass_app.age,
                 pass_app.cnic, pass_app.address, pass_app.city,
             pass_app.domicile, pass_app.province, pass_app.district
                 )
         
-        return send_file(pdf_data, as_attachment=False, download_name="passport_token.pdf", mimetype='application/pdf')
+        return send_file(pdf_data, as_attachment=False, download_name="passport_token.pdf", mimetype='application/pdf') # send file is flask method to send file to user without saving it locally as we have pdf in bytes so we can use send_file
+     # as_attachment=False it will open in browser if true it will download directly
+     # download_name is for flask 2.0 and above if below use attachment_filename
     except Exception as e:
         return f"Error generating PDF: {str(e)}", 500 
      
@@ -127,3 +131,9 @@ if __name__ == '__main__':
     with app.app_context():
         db.create_all()
     app.run(debug=True)
+    
+    
+    
+    
+    # if the code isnot working in your system please install the following packages in real.txt
+    # donot run test.py it is for deleteing and creating database again and again bascicallt for testing purpose only
