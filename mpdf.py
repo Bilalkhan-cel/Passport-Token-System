@@ -111,8 +111,9 @@ def makepdf(token,name, dob, age, CNIC, Address, City, Domicile, province, Distr
     for instruction in instructions:
         pdf.cell(0, 6, instruction, ln=1, align='L')
 
-    pdf.output("real.pdf")
-    # pdf_byte=BytesIO()
-    # pdf.output(pdf_byte)
-    # pdf_byte.seek(0)
-    # return pdf_byte
+    #pdf.output("real.pdf")
+    pdf_byte=pdf.output(dest="S").encode('latin1')
+    
+    buffer = BytesIO(pdf_byte)
+    buffer.seek(0)
+    return buffer
