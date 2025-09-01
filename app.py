@@ -1,9 +1,9 @@
 from flask import Flask, request, render_template, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy 
-from sqlalchemy import Column, Integer, String, Date ,CheckConstraint
+from sqlalchemy import Column, Integer, String ,CheckConstraint
 from flask import send_file
 import io
-from datetime import datetime
+from datetime import datetime , date
 import mpdf 
 
 app = Flask(__name__)
@@ -25,6 +25,8 @@ class Passport(db.Model):
     district=db.Column(db.String(100))
     domicile=db.Column(db.String(100))
 
+    created_date=db.Column(db.DateTime, default=datetime.utcnow)   # new column banaya hai jab koi new user aye ga from submit kry ga to us din ka date time automatically save ho jae ga database me 
+                                                                
     __table_args__=(CheckConstraint('token<=800','token_max'),) 
     
    
@@ -34,7 +36,16 @@ class Passport(db.Model):
 def index():
   
      return render_template("index.html")
-  
+
+
+def get_token_number():
+    today=date.today()        #aj ki date return kry ga
+
+    count_today=Passport.query.filter(
+        db.func.date(Passport.created_date)==today    # db.funct.date aik sql query ki trah work krti hai or aj ki date ki basis pe total token numbers ka count return krti hai
+    ).count()                                         
+   
+    return count_today + 1          #for e.g aj 1st sept ko 3 logon ne register kia hua hai already to ab ye count 3 de ga or sath next any waly user ko 4 token number assign kry ga
 
 
 @app.route("/submit", methods=["POST"])
@@ -54,10 +65,20 @@ def submit():
 
      if not all([name, cnic, address]):
             return "Please fill in all required fields", 400
+     
+     daily_token=get_token_number()      # ye aj ki date ki base pe total token number count kry ga agr 800 log pury hogye to next user pe koi token generate ni hoga
+
+     if daily_token > 800:
+            return "Daily limit of 800 tokens reached. Try tomorrow.", 400
+     
+     if datetime.now().time() >= datetime.strptime('18:00', '%H:%M').time(): # after 2pm no tokens will be issued and after 12am token will be reset to 0
+               
+                return "Token limit reached for today. Please try again tomorrow.", 400
                                                             
-     dob=datetime.strptime(dob, '%Y-%m-%d') #converting string to date object                                                          
+     dob=datetime.strptime(dob, '%Y-%m-%d') #converting string to date object      
+
      passport_app = Passport( 
-            token=Passport.query.count() + 1,    # token will be incremented by 1 for each new entry
+            token=daily_token,     #daily reset ho k token number de ga
             name=name,
             age=age,
             dob=dob,
@@ -72,20 +93,13 @@ def submit():
             db.session.add(passport_app)  
             db.session.commit()
             
-            if datetime.now().time() >= datetime.strptime('14:00', '%H:%M').time(): # after 2pm no tokens will be issued and after 12am token will be reset to 0
-                passport_app.token = 0 
-                db.session.commit()
-                return "Token limit reached for today. Please try again tomorrow.", 400
-                
-            else:
-            
             
             #     vpdf=mpdf.makepdf(
             #     passport_app.token, passport_app.name, passport_app.dob, passport_app.age,
             #     passport_app.cnic, passport_app.address, passport_app.city,
             # passport_app.domicile, passport_app.province, passport_app.district
             #     )
-                return redirect(url_for("thank_you", name=name,token=passport_app.token,id=passport_app.id))
+            return redirect(url_for("thank_you", name=name,token=passport_app.token,id=passport_app.id))
             
      except Exception as e:      # exception e contains error data if we use except only it will detect error but no idea "WHAT ERROR"
             db.session.rollback()
