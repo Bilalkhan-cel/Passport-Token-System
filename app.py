@@ -73,7 +73,7 @@ def submit():
             db.session.commit()
             
             if datetime.now().time() >= datetime.strptime('14:00', '%H:%M').time(): # after 2pm no tokens will be issued and after 12am token will be reset to 0
-                passport_app.token = 0
+                passport_app.token = 0 
                 db.session.commit()
                 return "Token limit reached for today. Please try again tomorrow.", 400
                 
