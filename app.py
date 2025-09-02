@@ -19,6 +19,8 @@ class Passport(db.Model):
     age=db.Column(db.String(100),nullable=False)
     dob=db.Column(db.Date,nullable=False)
     cnic=db.Column(db.String(50),nullable=False)
+    mcnic=db.Column(db.String(50),nullable=False,default="00000-0000000-0")  # mcnic is for minor children whose father cnic is required
+    fcnic=db.Column(db.String(50),nullable=False,default="00000-0000000-0") # fcnic is for father cnic of minor children
     address=db.Column(db.String(250),nullable=False)
     province=db.Column(db.String(100))
     city=db.Column(db.String(100))
@@ -57,6 +59,8 @@ def submit():
      age=request.form.get("age", "").strip()       
      dob=request.form.get("dob", "").strip()       
      cnic=request.form.get("cnic", "").strip()         #.strip() handles spacing errors
+     mcnic=request.form.get("mcnic", "").strip()         #.strip() handles spacing errors
+     fcnic=request.form.get("fcnic", "").strip()         #.strip() handles spacing errors
      address=request.form.get("address", "").strip() 
      province=request.form.get("province", "").strip() 
      city=request.form.get("city", "").strip()          
@@ -83,6 +87,8 @@ def submit():
             age=age,
             dob=dob,
             cnic=cnic,
+            mcnic=mcnic,
+            fcnic=fcnic,
             address=address,
             province=province,
             city=city,
