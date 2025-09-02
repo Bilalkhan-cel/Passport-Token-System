@@ -3,7 +3,8 @@
 
 <div class="header-section">
     <div class="logo-container">
-        <img src="{{ url_for('static', filename='images/passport.jpeg') }}" alt="Pakistan Government Logo" class="government-logo">
+        <img src="{{ url_for('static', filename='images/passport.jpeg') }}" alt="Pakistan Government Logo"
+            class="government-logo">
     </div>
     <div class="header-text">
         <h1>Government of Pakistan</h1>
@@ -40,151 +41,188 @@
             <div class="form-row">
                 <div class="form-group">
                     <label for="cnic">CNIC Number <span class="required">*</span></label>
-                    <input type="text" id="cnic" name="cnic" placeholder="XXXXX-XXXXXXX-X" pattern="[0-9]{5}-[0-9]{7}-[0-9]{1}" required>
+                    <input type="text" id="cnic" name="cnic" placeholder="XXXXX-XXXXXXX-X"
+                        pattern="[0-9]{5}-[0-9]{7}-[0-9]{1}" required>
                 </div>
             </div>
         </div>
-
-        <div class="form-section">
-            <div class="section-header">
-                <h3><i class="icon-location"></i>Address Information</h3>
-            </div>
-            
-            <div class="form-row">
-                <div class="form-group full-width">
-                    <label for="address">Address <span class="required">*</span></label>
-                    <textarea id="address" name="address" rows="3" placeholder="House/Street/Area etc" required></textarea>
-                </div>
-            </div>
-
+   <div id="under18" style="display:none;" class="form-section">
             <div class="form-row">
                 <div class="form-group">
-                    <label for="province">Province <span class="required">*</span></label>
-                    <select id="province" name="province" required>
-                        <option value="">Select Your Province</option>
-                        <option value="Punjab">Punjab</option>
-                        <option value="Federal Capital">Federal Capital Territory</option>
-                        <option value="Sindh">Sindh</option>
-                        <option value="Balochistan">Balochistan</option>
-                        <option value="KPK">Khyber Pakhtunkhwa</option>
-                        <option value="Gilgit-Baltistan">Gilgit-Baltistan</option>
-                        <option value="AJK">Azad Jammu & Kashmir</option>
-
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="city">City <span class="required">*</span></label>
-                    <select id="city" name="city" required>
-                        <option value="">Select City</option>
-                        <option value="Lahore">Lahore</option>
-                        <option value="Karachi">Karachi</option>
-                        <option value="Islamabad">Islamabad</option>
-                        <option value="Rawalpindi">Rawalpindi</option>
-                        <option value="Faisalabad">Faisalabad</option>
-                        <option value="Multan">Multan</option>
-                        <option value="Peshawar">Peshawar</option>
-                        <option value="Quetta">Quetta</option>
-                        <option value="Sialkot">Sialkot</option>
-                        <option value="Gujranwala">Gujranwala</option>
-                        <option value="Hyderabad">Hyderabad</option>
-                        <option value="Bahawalpur">Bahawalpur</option>
-                        <option value="Sargodha">Sargodha</option>
-                        <option value="Sukkur">Sukkur</option>
-                        <option value="Abbottabad">Abbottabad</option>
-                        <option value="Mardan">Mardan</option>
-                        <option value="Mingora">Mingora</option>
-                        <option value="Larkana">Larkana</option>
-                        <option value="Sahiwal">Sahiwal</option>
-                        <option value="Okara">Okara</option>
-                    </select>
+                    <label for="cnic">Father CNIC Number <span class="required">*</span></label>
+                    <input type="text" id="cnic" name="fcnic" placeholder="XXXXX-XXXXXXX-X"
+                        pattern="[0-9]{5}-[0-9]{7}-[0-9]{1}" required>
                 </div>
             </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="district">District <span class="required">*</span></label>
-                    <select id="district" name="district" required>
-                        <option value="">Select District</option>
-                        <option value="Lahore">Lahore</option>
-                        <option value="Karachi">Karachi</option>
-                        <option value="Islamabad">Islamabad</option>
-                        <option value="Rawalpindi">Rawalpindi</option>
-                        <option value="Faisalabad">Faisalabad</option>
-                        <option value="Multan">Multan</option>
-                        <option value="Peshawar">Peshawar</option>
-                        <option value="Quetta">Quetta</option>
-                        <option value="Sialkot">Sialkot</option>
-                        <option value="Gujranwala">Gujranwala</option>
-                        <option value="Hyderabad">Hyderabad</option>
-                        <option value="Bahawalpur">Bahawalpur</option>
-                        <option value="Sargodha">Sargodha</option>
-                        <option value="Sukkur">Sukkur</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="domicile">Domicile <span class="required">*</span></label>
-                    <select id="domicile" name="domicile" required>
-                        <option value="">Select Domicile</option>
-                        <option value="Punjab">Punjab</option>
-                        <option value="Sindh">Sindh</option>
-                        <option value="Khyber Pakhtunkhwa">Khyber Pakhtunkhwa</option>
-                        <option value="Balochistan">Balochistan</option>
-                        <option value="Gilgit-Baltistan">Gilgit-Baltistan</option>
-                        <option value="Azad Jammu & Kashmir">Azad Jammu & Kashmir</option>
-                        <option value="Islamabad">Islamabad Capital Territory</option>
-                    </select>
-                </div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label for="cnic">Mother CNIC Number <span class="required">*</span></label>
+                <input type="text" id="cnic" name="mcnic" placeholder="XXXXX-XXXXXXX-X"
+                    pattern="[0-9]{5}-[0-9]{7}-[0-9]{1}" required>
             </div>
         </div>
+ 
+     <div class="form-group">
+       
+       <label  class="checkbox-label">
+        <input type="checkbox" name="terms" id="terms" required>
+        Parental consent affirmation (for applicants under 18 years)
+        </label>
+    </div>
+</div>
 
-        <div class="form-section">
-            <div class="section-header">
-                <h3><i class="icon-contact"></i>Contact Information</h3>
-            </div>
-            
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="email">Email Address <span class="required">*</span></label>
-                    <input type="email" id="email" name="email" placeholder="example@domain.com" required>
-                </div>
-            </div>
-            
-            <div class="form-row">
-                <div class="form-group phone-group">
-                    <label for="phone">Phone Number <span class="required">*</span></label>
-                    <div class="phone-container">
-                        <select id="country_code" name="country_code" class="country-code">
-                            <option value="+92">🇵🇰 +92</option>
-                            <option value="+1">🇺🇸 +1</option>
-                            <option value="+44">🇬🇧 +44</option>
-                            <option value="+91">🇮🇳 +91</option>
-                        </select>
-                        <input type="tel" id="phone" name="phone" 
-                               pattern="(3\d{9}|1\d{9})" 
-                               title="Enter valid Pakistani phone number (e.g., 3001234567 or 1234567890)"
-                               placeholder="3001234567"
-                               required>
-                    </div>
-                </div>
-            </div>
+<div class="form-section">
+    <div class="section-header">
+        <h3><i class="icon-location"></i>Address Information</h3>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group full-width">
+            <label for="address">Address <span class="required">*</span></label>
+            <textarea id="address" name="address" rows="3" placeholder="House/Street/Area etc" required></textarea>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="province">Province <span class="required">*</span></label>
+            <select id="province" name="province" required>
+                <option value="">Select Your Province</option>
+                <option value="Punjab">Punjab</option>
+                <option value="Federal Capital">Federal Capital Territory</option>
+                <option value="Sindh">Sindh</option>
+                <option value="Balochistan">Balochistan</option>
+                <option value="KPK">Khyber Pakhtunkhwa</option>
+                <option value="Gilgit-Baltistan">Gilgit-Baltistan</option>
+                <option value="AJK">Azad Jammu & Kashmir</option>
+
+            </select>
         </div>
 
-        <div class="submit-section">
-            
-            <button type="submit" class="submit-btn">
-                <i class="icon-submit"></i>
-                Submit Application
-            </button>
-            
+        <div class="form-group">
+            <label for="city">City <span class="required">*</span></label>
+            <select id="city" name="city" required>
+                <option value="">Select City</option>
+                <option value="Lahore">Lahore</option>
+                <option value="Karachi">Karachi</option>
+                <option value="Islamabad">Islamabad</option>
+                <option value="Rawalpindi">Rawalpindi</option>
+                <option value="Faisalabad">Faisalabad</option>
+                <option value="Multan">Multan</option>
+                <option value="Peshawar">Peshawar</option>
+                <option value="Quetta">Quetta</option>
+                <option value="Sialkot">Sialkot</option>
+                <option value="Gujranwala">Gujranwala</option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Bahawalpur">Bahawalpur</option>
+                <option value="Sargodha">Sargodha</option>
+                <option value="Sukkur">Sukkur</option>
+                <option value="Abbottabad">Abbottabad</option>
+                <option value="Mardan">Mardan</option>
+                <option value="Mingora">Mingora</option>
+                <option value="Larkana">Larkana</option>
+                <option value="Sahiwal">Sahiwal</option>
+                <option value="Okara">Okara</option>
+            </select>
         </div>
-    </form>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="district">District <span class="required">*</span></label>
+            <select id="district" name="district" required>
+                <option value="">Select District</option>
+                <option value="Lahore">Lahore</option>
+                <option value="Karachi">Karachi</option>
+                <option value="Islamabad">Islamabad</option>
+                <option value="Rawalpindi">Rawalpindi</option>
+                <option value="Faisalabad">Faisalabad</option>
+                <option value="Multan">Multan</option>
+                <option value="Peshawar">Peshawar</option>
+                <option value="Quetta">Quetta</option>
+                <option value="Sialkot">Sialkot</option>
+                <option value="Gujranwala">Gujranwala</option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Bahawalpur">Bahawalpur</option>
+                <option value="Sargodha">Sargodha</option>
+                <option value="Sukkur">Sukkur</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="domicile">Domicile <span class="required">*</span></label>
+            <select id="domicile" name="domicile" required>
+                <option value="">Select Domicile</option>
+                <option value="Punjab">Punjab</option>
+                <option value="Sindh">Sindh</option>
+                <option value="Khyber Pakhtunkhwa">Khyber Pakhtunkhwa</option>
+                <option value="Balochistan">Balochistan</option>
+                <option value="Gilgit-Baltistan">Gilgit-Baltistan</option>
+                <option value="Azad Jammu & Kashmir">Azad Jammu & Kashmir</option>
+                <option value="Islamabad">Islamabad Capital Territory</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div class="form-section">
+    <div class="section-header">
+        <h3><i class="icon-contact"></i>Contact Information</h3>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="email">Email Address <span class="required">*</span></label>
+            <input type="email" id="email" name="email" placeholder="example@domain.com" required>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group phone-group">
+            <label for="phone">Phone Number <span class="required">*</span></label>
+            <div class="phone-container">
+                <select id="country_code" name="country_code" class="country-code">
+                    <option value="+92">🇵🇰 +92</option>
+                    <option value="+1">🇺🇸 +1</option>
+                    <option value="+44">🇬🇧 +44</option>
+                    <option value="+91">🇮🇳 +91</option>
+                </select>
+                <input type="tel" id="phone" name="phone" pattern="(3\d{9}|1\d{9})"
+                    title="Enter valid Pakistani phone number (e.g., 3001234567 or 1234567890)" placeholder="3001234567"
+                    required>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="submit-section">
+
+    <button type="submit" class="submit-btn">
+        <i class="icon-submit"></i>
+        Submit Application
+    </button>
+
+</div>
+</form>
 </div>
 
 <div class="footer-section">
     <p>&copy; 2024 Government of Pakistan - Directorate General of Immigration & Passports</p>
     <p>For assistance, visit your nearest passport office or call helpline: 051-111-223344</p>
 </div>
+
+<script>
+  document.getElementById("age").addEventListener("input", function() {
+    let age = this.value;
+    let under18Fields = document.getElementById("under18");
+    
+    if (age && age < 18) {
+      under18Fields.style.display = "block";
+    } else {
+      under18Fields.style.display = "none";
+    }
+  });
+</script>
 
 {% endblock %}

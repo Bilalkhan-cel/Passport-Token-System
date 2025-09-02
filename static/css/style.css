@@ -628,3 +628,10 @@ input[type="date"]:valid::before {
         gap: 0.25rem;
     }
 }
+
+/* Make the checkbox larger */
+input[type="checkbox"] {
+    width: 16px; /* Increase width */
+    height: 16px; /* Increase height */
+    cursor: pointer; /* Add pointer cursor */
+    accent-color: var(--pakistan-light-green); }/* Use theme color for checkbox */
