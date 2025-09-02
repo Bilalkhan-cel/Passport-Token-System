@@ -19,35 +19,34 @@ class Passport(db.Model):
     age=db.Column(db.String(100),nullable=False)
     dob=db.Column(db.Date,nullable=False)
     cnic=db.Column(db.String(50),nullable=False)
-    mcnic=db.Column(db.String(50),nullable=False,default="00000-0000000-0")  # mcnic is for minor children whose father cnic is required
-    fcnic=db.Column(db.String(50),nullable=False,default="00000-0000000-0") # fcnic is for father cnic of minor children
     address=db.Column(db.String(250),nullable=False)
     province=db.Column(db.String(100))
     city=db.Column(db.String(100))
     district=db.Column(db.String(100))
     domicile=db.Column(db.String(100))
+    
+    # Minor fields - only for users under 18
+    father_cnic=db.Column(db.String(50), nullable=True)
+    mother_cnic=db.Column(db.String(50), nullable=True)
 
-    created_date=db.Column(db.DateTime, default=datetime.utcnow)   # new column banaya hai jab koi new user aye ga from submit kry ga to us din ka date time automatically save ho jae ga database me 
+    created_date=db.Column(db.DateTime, default=datetime.utcnow)   
                                                                 
     __table_args__=(CheckConstraint('token<=800','token_max'),) 
     
-   
- 
 
 @app.route("/", methods=['POST','GET'])
 def index():
-  
      return render_template("index.html")
 
 
 def get_token_number():
-    today=date.today()        #aj ki date return kry ga
+    today=date.today()
 
     count_today=Passport.query.filter(
-        db.func.date(Passport.created_date)==today    # db.funct.date aik sql query ki trah work krti hai or aj ki date ki basis pe total token numbers ka count return krti hai
+        db.func.date(Passport.created_date)==today
     ).count()                                         
    
-    return count_today + 1          #for e.g aj 1st sept ko 3 logon ne register kia hua hai already to ab ye count 3 de ga or sath next any waly user ko 4 token number assign kry ga
+    return count_today + 1
 
 
 @app.route("/submit", methods=["POST"])
@@ -58,66 +57,65 @@ def submit():
      name=request.form.get("name", "").strip()       
      age=request.form.get("age", "").strip()       
      dob=request.form.get("dob", "").strip()       
-     cnic=request.form.get("cnic", "").strip()         #.strip() handles spacing errors
-     mcnic=request.form.get("mcnic", "").strip()         #.strip() handles spacing errors
-     fcnic=request.form.get("fcnic", "").strip()         #.strip() handles spacing errors
+     cnic=request.form.get("cnic", "").strip()
      address=request.form.get("address", "").strip() 
      province=request.form.get("province", "").strip() 
      city=request.form.get("city", "").strip()          
      district=request.form.get("district", "").strip()  
-     domicile=request.form.get("domicile", "").strip()  
+     domicile=request.form.get("domicile", "").strip()
+     
+     # Get minor fields (these will be empty for adults)
+     father_cnic=request.form.get("fcnic", "").strip()  # Father CNIC
+     mother_cnic=request.form.get("mcnic", "").strip()  # Mother CNIC
+     
+     # For PDF generation, we'll use father_cnic as parent_cnic
+     parent_cnic = father_cnic if father_cnic else mother_cnic
 
      if not all([name, cnic, address]):
             return "Please fill in all required fields", 400
      
-     daily_token=get_token_number()      # ye aj ki date ki base pe total token number count kry ga agr 800 log pury hogye to next user pe koi token generate ni hoga
+     # Check if minor fields are required
+     if int(age) < 18:
+         if not all([father_cnic, mother_cnic]):
+             return "Father CNIC and Mother CNIC are required for minors", 400
+     
+     daily_token=get_token_number()
 
      if daily_token > 800:
             return "Daily limit of 800 tokens reached. Try tomorrow.", 400
      
-     if datetime.now().time() >= datetime.strptime('18:00', '%H:%M').time(): # after 2pm no tokens will be issued and after 12am token will be reset to 0
-               
+     if datetime.now().time() >= datetime.strptime('22:00', '%H:%M').time():
                 return "Token limit reached for today. Please try again tomorrow.", 400
                                                             
-     dob=datetime.strptime(dob, '%Y-%m-%d') #converting string to date object      
+     dob=datetime.strptime(dob, '%Y-%m-%d')
 
      passport_app = Passport( 
-            token=daily_token,     #daily reset ho k token number de ga
+            token=daily_token,
             name=name,
             age=age,
             dob=dob,
             cnic=cnic,
-            mcnic=mcnic,
-            fcnic=fcnic,
             address=address,
             province=province,
             city=city,
             district=district,
-            domicile=domicile
+            domicile=domicile,
+            father_cnic=father_cnic if father_cnic else None,
+            mother_cnic=mother_cnic if mother_cnic else None
         )
      try:
             db.session.add(passport_app)  
             db.session.commit()
             
-            
-            #     vpdf=mpdf.makepdf(
-            #     passport_app.token, passport_app.name, passport_app.dob, passport_app.age,
-            #     passport_app.cnic, passport_app.address, passport_app.city,
-            # passport_app.domicile, passport_app.province, passport_app.district
-            #     )
             return redirect(url_for("thank_you", name=name,token=passport_app.token,id=passport_app.id))
             
-     except Exception as e:      # exception e contains error data if we use except only it will detect error but no idea "WHAT ERROR"
+     except Exception as e:
             db.session.rollback()
             if "UNIQUE constraint" in str(e):
                 return "CNIC already exists in system", 400
             else:
-                return f"Error occurred: {str(e)}", 500  #500 IS ERROR OF INTERNAL SERVER ERROR
+                return f"Error occurred: {str(e)}", 500
 
-        
-   
-    
-    
 
 @app.route("/thankyou")
 def thank_you():
@@ -125,35 +123,30 @@ def thank_you():
     token = request.args.get("token", "",)
     id = request.args.get("id", "",)
     
-    return render_template("thankyou.html", name=name, token=token,id=id) # passed id and token and name so that in thankyou.html we can use it to generate pdf and we can also see our name and token on screen
+    return render_template("thankyou.html", name=name, token=token,id=id)
 
 @app.route("/view/<int:id>")
 def view(id):
     try:
-        pass_app=Passport.query.get_or_404(id) # got all the data by id from database
-        # gereted pdf from mpdf.py
+        pass_app=Passport.query.get_or_404(id)
+        
+        # Call PDF function with all parameters including minor fields
         pdf_data=mpdf.makepdf(
                 pass_app.token, pass_app.name, pass_app.dob, pass_app.age,
                 pass_app.cnic, pass_app.address, pass_app.city,
-            pass_app.domicile, pass_app.province, pass_app.district
+                pass_app.domicile, pass_app.province, pass_app.district,
+                father_cnic=pass_app.father_cnic,
+                mother_cnic=pass_app.mother_cnic,
+                parent_cnic=pass_app.father_cnic  # Primary guardian CNIC
                 )
         
-        return send_file(pdf_data, as_attachment=False, download_name="passport_token.pdf", mimetype='application/pdf') # send file is flask method to send file to user without saving it locally as we have pdf in bytes so we can use send_file
-     # as_attachment=False it will open in browser if true it will download directly
-     # download_name is for flask 2.0 and above if below use attachment_filename
+        return send_file(pdf_data, as_attachment=False, download_name="passport_token.pdf", mimetype='application/pdf')
+        
     except Exception as e:
         return f"Error generating PDF: {str(e)}", 500 
-     
 
 
-
-if __name__ == '__main__':
+if __name__ == '__main__':  
     with app.app_context():
         db.create_all()
     app.run(debug=True)
-    
-    
-    
-    
-    # if the code isnot working in your system please install the following packages in real.txt
-    # donot run test.py it is for deleteing and creating database again and again bascicallt for testing purpose only
