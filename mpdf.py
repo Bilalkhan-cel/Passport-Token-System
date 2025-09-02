@@ -107,7 +107,7 @@ def makepdf(token,name, dob, age, CNIC, Address, City, Domicile, province, Distr
     
     #adding QR code in the right position without overlapping with the personal details
     if qr_buffer:
-        pdf.image(qr_buffer, x=150, y=pdf.get_y()-50, w=40, h=40)  # smaller QR code
+        pdf.image(qr_buffer, x=125, y=pdf.get_y()-50, w=50, h=50)  # smaller QR code
 
     pdf.ln(3)     
 
