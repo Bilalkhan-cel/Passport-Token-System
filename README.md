@@ -96,6 +96,38 @@ qrcode==7.4.2
 Pillow==10.0.0
 ```
 
+## User Interface
+<br>
+**Sumbission Form**
+<img width="1597" height="958" alt="image" src="https://github.com/user-attachments/assets/2f7062a2-3c59-456a-8900-47de0d6481b4" />
+<br>
+<img width="1087" height="607" alt="image" src="https://github.com/user-attachments/assets/399af972-1f05-48fc-9871-e6b56f3ba8ff" />
+<br>
+<img width="1237" height="733" alt="image" src="https://github.com/user-attachments/assets/56f2ddc4-25d6-4f16-aadc-935aae20f5e1" />
+<br>
+** Parental Consent (additional From appers for minors) **
+<img width="1077" height="397" alt="image" src="https://github.com/user-attachments/assets/e4cf4bf4-47cc-43dd-ae36-b0e6c077d610" />
+<br>
+
+**Thank you page**
+<img width="752" height="967" alt="image" src="https://github.com/user-attachments/assets/b510c509-43d5-478d-a18b-d8bab2589921" />
+<br>
+
+**PDF (token) For Adults**
+<br>
+<img width="620" height="877" alt="image" src="https://github.com/user-attachments/assets/2f36a248-abd0-4272-8299-0c206431b65d" />
+<br>
+**PDF (token) For Minors**
+<br>
+<img width="638" height="892" alt="image" src="https://github.com/user-attachments/assets/785c5a04-e823-4a95-8810-8771ccfb54ef" />
+<br>
+
+**Instuction Page**
+<br>
+<img width="646" height="902" alt="image" src="https://github.com/user-attachments/assets/bbc32f7a-4d76-462e-b6c6-df0a928cf6cb" />
+<br>
+
+
 ## License
 
 Educational and government use.
