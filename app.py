@@ -26,8 +26,8 @@ class Passport(db.Model):
     domicile=db.Column(db.String(100))
     
     # Minor fields - only for users under 18
-    father_cnic=db.Column(db.String(50), nullable=True)
-    mother_cnic=db.Column(db.String(50), nullable=True)
+    father_cnic=db.Column(db.String(50), nullable=False,default='00000-0000000-0')
+    mother_cnic=db.Column(db.String(50), nullable=False,default='00000-0000000-0')
 
     created_date=db.Column(db.DateTime, default=datetime.utcnow)   
                                                                 
