@@ -98,8 +98,9 @@ Pillow==10.0.0
 
 ## User Interface
 <br>
+
 **Sumbission Form**
-<img width="1597" height="958" alt="image" src="https://github.com/user-attachments/assets/2f7062a2-3c59-456a-8900-47de0d6481b4" />
+<img width="600" height="600" alt="image" src="https://github.com/user-attachments/assets/2f7062a2-3c59-456a-8900-47de0d6481b4" />
 <br>
 <img width="1087" height="607" alt="image" src="https://github.com/user-attachments/assets/399af972-1f05-48fc-9871-e6b56f3ba8ff" />
 <br>
